@@ -34,7 +34,7 @@ def main():
     with open(jdupes_report_filename, 'r') as report_file:
         line = report_file.readline().rstrip('\n')
         while line:
-            if "bytes each" not in line:
+            if "bytes each" not in line and "byte  each" not in line:
                 parser.error(f'{jdupes_report_filename} does not seem to be an fdupes/jdupes report file')
             file_id += 1 
             file_size = int(line.split()[0])
