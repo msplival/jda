@@ -1,0 +1,46 @@
+290926 bytes each:
+/dir-1/PB230200.JPG
+/dir-2/PB230200.JPG
+
+341545 bytes each:
+/dir-1/PB230183.JPG
+/dir-2/PB230183.JPG
+
+282974 bytes each:
+/dir-1/PB230167.JPG
+/dir-2/PB230167.JPG
+
+339236 bytes each:
+/dir-1/PB230180.JPG
+/dir-2/PB230180.JPG
+
+340288 bytes each:
+/dir-1/PB230231.JPG
+/dir-2/PB230231.JPG
+
+344965 bytes each:
+/dir-1/PB230236.JPG
+/dir-2/PB230236.JPG
+
+255983 bytes each:
+/dir-1/PB230202.JPG
+/dir-2/PB230202.JPG
+
+366755700 bytes each:
+/dir-6/Downloads/bigfile.avi
+/dir-4/bigfile.avi
+
+67805 bytes each:
+/dir-6/Downloads/bigfile.srt
+/dir-4/bigfile.srt
+
+8644 bytes each:
+/dir-5/LICENSE_E_AMERICA.TXT
+/dir-5/LICENSE_E_ASIA.TXT
+/dir-5/LICENSE_E_OCEANIA.TXT
+
+12966 bytes each:
+/dir-6/Ivan_nokia_sms_20100811.csv
+/dir-7/Ivan_nokia_sms_20100811.csv
+
+
