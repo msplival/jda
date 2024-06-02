@@ -4,6 +4,7 @@ import argparse
 from collections import defaultdict
 import itertools
 import os
+import sys
 
 
 def pretty_print_bytes(num_bytes):
@@ -31,7 +32,8 @@ def main():
     duplicates = []
     
     file_id = 0 
-    with open(jdupes_report_filename, 'r') as report_file:
+    print(f'Reading {jdupes_report_filename}...', file=sys.stderr)
+    with open(jdupes_report_filename, 'r', errors='replace') as report_file:
         line = report_file.readline().rstrip('\n')
         while line:
             if "bytes each" not in line and "byte  each" not in line:
@@ -53,6 +55,7 @@ def main():
                 
             line = report_file.readline().rstrip('\n')
 
+    print('Building directory list...', file=sys.stderr)
     dirs = defaultdict(dict)
     for file_info in duplicates:
         file_id = file_info['id']
@@ -61,8 +64,9 @@ def main():
         if directory not in dirs[file_id]:
             dirs[file_id][directory] = file_size
 
-    directory_pairs = defaultdict(int)
 
+    print('Calculating directory pairs...', file=sys.stderr)
+    directory_pairs = defaultdict(int)
     for file, dir in dirs.items():
         sorted_dirs = sorted(dir.items())
         for (d1, s1), (d2, s2) in itertools.combinations(sorted_dirs, 2):
@@ -72,6 +76,7 @@ def main():
             sorted_pair = tuple(sorted((d1, d2)))
             directory_pairs[sorted_pair] += shared_size
 
+    print('Sorting directory pairs...', file=sys.stderr)
     sorted_directory_pairs = sorted(directory_pairs.items(), key=lambda x: -x[1])
 
     for pair in sorted_directory_pairs:
