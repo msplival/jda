@@ -16,13 +16,11 @@ def pretty_print_bytes(num_bytes):
 
 def main():
     parser = argparse.ArgumentParser(description="Process some parameters.")
-    parser.add_argument('--prefix', default='', help='Optional prefix')
     parser.add_argument('--summary', action='store_true', help='Print only summary (suppress normal output)')
     parser.add_argument('report_file', nargs='?', help='Mandatory report file (positional argument)')
 
     args = parser.parse_args()
     jdupes_report_filename = args.report_file
-    prefix = args.prefix
 
     if not jdupes_report_filename:
         parser.error('The report file must be specified using --report-file or as a positional argument.')
