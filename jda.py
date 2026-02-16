@@ -17,6 +17,7 @@ def pretty_print_bytes(num_bytes):
 def main():
     parser = argparse.ArgumentParser(description="Process some parameters.")
     parser.add_argument('--prefix', default='', help='Optional prefix')
+    parser.add_argument('--summary', action='store_true', help='Print only summary (suppress normal output)')
     parser.add_argument('report_file', nargs='?', help='Mandatory report file (positional argument)')
 
     args = parser.parse_args()
@@ -30,15 +31,16 @@ def main():
         parser.error(f'Report file "{jdupes_report_filename}" does not exist.')
 
     duplicates = []
-    
-    file_id = 0 
-    print(f'Reading {jdupes_report_filename}...', file=sys.stderr)
+
+    file_id = 0
+    if not args.summary:
+        print(f'Reading {jdupes_report_filename}...', file=sys.stderr)
     with open(jdupes_report_filename, 'r', errors='replace') as report_file:
         line = report_file.readline().rstrip('\n')
         while line:
             if "bytes each" not in line and "byte  each" not in line:
                 parser.error(f'{jdupes_report_filename} does not seem to be an fdupes/jdupes report file')
-            file_id += 1 
+            file_id += 1
             file_size = int(line.split()[0])
 
             while True:
@@ -52,8 +54,34 @@ def main():
                     'name': file_name,
                     'size': file_size
                 })
-                
+
             line = report_file.readline().rstrip('\n')
+
+    if args.summary:
+        # duplicate sets: distinct ids/files
+        # duplicate copies: sum(n-1)
+        # wasted space: sum((n-1)*size)
+        count_by_id = defaultdict(int)
+        size_by_id = {}
+        for fi in duplicates:
+            fid = fi['id']
+            count_by_id[fid] += 1
+            if fid not in size_by_id:
+                size_by_id[fid] = fi['size']
+
+        num_sets = len(count_by_id)
+        dup_copies = 0
+        wasted = 0
+        for fid, n in count_by_id.items():
+            if n > 1:
+                dup_copies += (n - 1)
+                wasted += (n - 1) * int(size_by_id.get(fid, 0))
+
+        print(f"Duplicate sets: {num_sets}")
+        print(f"Duplicate copies: {dup_copies}")
+        print(f"Wasted space: {pretty_print_bytes(wasted)}")
+        # it's a bit ugly, but... minimal intrusion :)
+        return
 
     print('Building directory list...', file=sys.stderr)
     dirs = defaultdict(dict)
