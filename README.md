@@ -31,7 +31,7 @@ jda will print out the directories with the largest size of identical files. It 
 You can also supply `--summary` option to jda. Instead of printing full report it will print summary instead:
 
 ```console
-./jda.py --summary testData/jdupes.test_report.txt 
+$ jda --summary testData/jdupes.test_report.txt 
 Duplicate sets: 11
 Duplicate copies: 12
 Wasted space: 352.0 MB
