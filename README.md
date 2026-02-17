@@ -28,6 +28,15 @@ $ jda /tmp/jdupes.report.txt
 
 jda will print out the directories with the largest size of identical files. It will prepend `meld` before the directories as meld is a preferred tool. You can use meld to investigate the contents of these directories.
 
+You can also supply `--summary` option to jda. Instead of printing full report it will print summary instead:
+
+```console
+./jda.py --summary testData/jdupes.test_report.txt 
+Duplicate sets: 11
+Duplicate copies: 12
+Wasted space: 352.0 MB
+```
+
 ## Inspiration
 
 jda is inspired by  [FdupesAnalyzer](https://github.com/codecliff/FdupesAnalyzer), which essentially does the same thing.
