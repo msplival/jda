@@ -1,0 +1,3 @@
+Size: 349.8 MB,  meld "/dir-4" "/dir-6/Downloads"
+Size: 2.1 MB,  meld "/dir-1" "/dir-2"
+Size: 12.7 kB,  meld "/dir-6" "/dir-7"
