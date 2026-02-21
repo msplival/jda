@@ -78,7 +78,7 @@ def main():
         return
 
     # External sort path: write (dir1, dir2, size) records to disk.
-    with tempfile.TemporaryDirectory() as tmpdir:
+    with tempfile.TemporaryDirectory(dir="/var/tmp") as tmpdir:
         pairs_path = os.path.join(tmpdir, "pairs.tsv")
         sorted_pairs_path = os.path.join(tmpdir, "pairs.sorted.tsv")
         agg_path = os.path.join(tmpdir, "pairs.agg.tsv")
@@ -89,7 +89,7 @@ def main():
         with open(jdupes_report_filename, 'r', errors='replace') as report_file:
             line = report_file.readline().rstrip('\n')
             while line:
-                if "bytes each" not in line and "byte each" not in line:
+                if "bytes each" not in line and "byte  each" not in line:
                     parser.error(f'{jdupes_report_filename} does not seem to be an fdupes/jdupes report file')
 
                 file_id += 1
